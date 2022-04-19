@@ -49,38 +49,35 @@ const logging = (req, res, next) => {
     next()
 }
 
+app.use(express.json())
+
 app.use(logging)
 
-app.use(express.static('./public'));
+app.use(express.static('./public'))
 
-app.get('/app', (req, res) => {
+app.get('/app', (req, res, next) => {
     res.type('text/plain')
     res.status(200).end('OK')
 })
 
-app.get('/app/flip', (req, res) => {
+app.get('/app/flip', (req, res, next) => {
     res.type('application/json')
     res.status(200).json({ 'flip': coin.coinFlip() })
 })
 
-app.get('/app/flips/:number', (req, res) => {
-    const raw = coin.coinFlips(parseInt(req.params.number))
+app.get('/app/flips/coins', (req, res, next) => {
+    const raw = coin.coinFlips(req.body.number)
     const summary = coin.countFlips(raw)
     res.type('application/json')
     res.status(200).json({ 'raw': raw, 'summary': summary })
 })
 
-app.get('/app/flip/call/heads', (req, res) => {
+app.get('/app/flip/call', (req, res, next) => {
     res.type('application/json')
-    res.status(200).json(coin.flipACoin('heads'))
+    res.status(200).json(coin.flipACoin(req.body.guess))
 })
 
-app.get('/app/flip/call/tails', (req, res) => {
-    res.type('application/json')
-    res.status(200).json(coin.flipACoin('tails'))
-})
-
-app.get('/app/log/access', (req, res) => {
+app.get('/app/log/access', (req, res, next) => {
     try {
         const query = db.prepare('SELECT * from accesslog').all()
         res.status(200).json(query)
@@ -89,11 +86,11 @@ app.get('/app/log/access', (req, res) => {
     }
 })
 
-app.get('/app/error', (req, res) => {
+app.get('/app/error', (req, res, next) => {
     throw new Error('Error test successful.')
 })
 
-app.use(function (req, res) {
+app.use(function (req, res, next) {
     res.type('text/plain')
     res.status(200).status(404).end('404 NOT FOUND')
 })

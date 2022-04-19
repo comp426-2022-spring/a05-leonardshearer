@@ -2,7 +2,7 @@
 
 import Database from 'better-sqlite3/lib/database.js';
 
-const db = new Database('log.db')
+const db = new Database('./data/log/access.db')
 
 const isInitialized = db.prepare(`SELECT name FROM sqlite_master WHERE type='table' and name='accesslog';`)
 
