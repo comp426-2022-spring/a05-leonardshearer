@@ -1,20 +1,3 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=7591035&assignment_repo_type=AssignmentRepo)
-# a05 Human Interface
-
-In this assignment, you will build an HTML human interface for your API. You will also document your API endpoints and consider package structure.
-
-## DO NOT CLONE THIS REPOSITORY DIRECTLY
-
-Use the GitHub classroom link instead: https://classroom.github.com/a/PUVGxeMe
-
-If you clone this repo directly, it will not be added to the organization as an individual repo associated with your account and you will not be able to push to it.
-
-## Instructions
-
-Full instructions for this assignment are available at: https://comp426.johndmart.in/a/05/
-
-<!-- DELETE EVERYTHING ABOVE THIS LINE -->
-
 # Coinserver Description
 
 This package exposes endpoints and provides a web interface to emulate random chance coin flip events in the following ways:
@@ -57,7 +40,7 @@ node server.js [options]
 #### Request cURL
 
 ```
-curl http://localhost:5000/app/
+curl http://localhost:5555/app/
 ```
 
 #### Response body
@@ -84,7 +67,7 @@ Keep-Alive: timeout=5
 #### Request cURL
 
 ```
-
+curl http://localhost:5555/app/flip
 ```
 
 #### Response body
@@ -96,7 +79,14 @@ Keep-Alive: timeout=5
 #### Response headers
 
 ```
-
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 16
+ETag: W/"10-VYm8Bk1/RW8RGhDXdTwBYk6lbGE"
+Date: Tue, 19 Apr 2022 04:01:20 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 ### /app/flips/:number/ (GET)
