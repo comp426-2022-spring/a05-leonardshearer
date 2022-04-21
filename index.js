@@ -65,7 +65,7 @@ app.get('/app/flip', (req, res, next) => {
     res.status(200).json({ 'flip': coin.coinFlip() })
 })
 
-app.get('/app/flips/coins', (req, res, next) => {
+app.post('/app/flip/coins', (req, res, next) => {
     const raw = coin.coinFlips(req.body.number)
     const summary = coin.countFlips(raw)
     res.type('application/json')

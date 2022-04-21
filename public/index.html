@@ -48,9 +48,19 @@
   </div>
   <div id="multi" class="hidden">
     <br>
-    <button id="multirun">Flip 10 coins</button>
+    <form id="multiflip">
+      <label for="numcoins">Number of flips:</label>
+      <br>
+      <input type="number" id="number" name="number">
+      <br>
+      <br>
+      <input type="submit" value="Run">
+    </form>
     <br>
-    <div id="multiresult"></div>
+    <div id="multiresult">
+      <div id="multisummary"></div>
+      <div id="multitable"></div>
+    </div>
   </div>
   <div id="guess" class="hidden">
     <br>
