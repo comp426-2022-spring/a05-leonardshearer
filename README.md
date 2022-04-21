@@ -40,7 +40,7 @@ node server.js [options]
 #### Request cURL
 
 ```
-curl http://localhost:5555/app/
+curl http://localhost:5000/app/
 ```
 
 #### Response body
@@ -67,7 +67,7 @@ Keep-Alive: timeout=5
 #### Request cURL
 
 ```
-curl http://localhost:5555/app/flip/
+curl http://localhost:5000/app/flip/
 ```
 
 #### Response body
@@ -94,7 +94,7 @@ Keep-Alive: timeout=5
 #### Request cURL
 
 ```
-curl http://localhost:5555/app/flips/10/
+curl http://localhost:5000/app/flips/10/
 ```
 
 #### Response body
@@ -121,7 +121,7 @@ Keep-Alive: timeout=5
 #### Request cURL
 
 ```
-curl -X POST -H 'Content-Type: application/json' -d '{ "number" : "10" }' http://localhost:5555/app/flip/coins/
+curl -X POST -H 'Content-Type: application/json' -d '{ "number" : "10" }' http://localhost:5000/app/flip/coins/
 ```
 
 #### Response body
@@ -148,7 +148,7 @@ Keep-Alive: timeout=5
 #### Request cURL
 
 ```
-curl http://localhost:5555/app/flip/call/heads
+curl http://localhost:5000/app/flip/call/heads
 ```
 
 #### Response body
@@ -175,7 +175,7 @@ Keep-Alive: timeout=5
 #### Request cURL
 
 ```
-curl -X POST -H 'Content-Type: application/json' -d '{"guess":"heads"}' http://localhost:5555/app/flip/call/
+curl -X POST -H 'Content-Type: application/json' -d '{"guess":"heads"}' http://localhost:5000/app/flip/call/
 ```
 
 #### Response body
@@ -202,7 +202,7 @@ Keep-Alive: timeout=5
 #### Request cURL
 
 ```
-curl http://localhost:5555/app/log/access/
+curl http://localhost:5000/app/log/access/
 ```
 
 #### Response body

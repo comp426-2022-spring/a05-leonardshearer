@@ -31,7 +31,7 @@ if (args.help || args.h) {
     process.exit(0)
 }
 
-const HTTP_PORT = (1 <= args.port && args.port <= 65535) ? args.port : 5555
+const HTTP_PORT = (1 <= args.port && args.port <= 65535) ? args.port : 5000
 const server = app.listen(HTTP_PORT, () => {
     console.log('App listening on port %PORT%'.replace('%PORT%', HTTP_PORT))
 })
