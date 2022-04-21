@@ -72,18 +72,17 @@ async function callFlip(call) {
 
         document.getElementById('guessresult').innerHTML = `
             <strong>Result</strong>
+            <br>` + result.result +
+            `<br>
             <br>
             Guess: 
             <br>
             <img src='./assets/img/` + call + `.png'>
             <br>
+            <br>
             Flip:
             <br>
-            <img src='./assets/img/` + result.flip + `.png'>
-            <br>
-            <br>
-            Result: 
-            <br>`+ result.result
+            <img src='./assets/img/` + result.flip + `.png'>`
     } catch (error) {
         console.log(error)
     }
