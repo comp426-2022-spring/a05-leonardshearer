@@ -72,7 +72,7 @@ app.post('/app/flip/coins', (req, res, next) => {
     res.status(200).json({ 'raw': raw, 'summary': summary })
 })
 
-app.get('/app/flip/call', (req, res, next) => {
+app.post('/app/flip/call', (req, res, next) => {
     res.type('application/json')
     res.status(200).json(coin.flipACoin(req.body.guess))
 })

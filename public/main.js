@@ -37,7 +37,7 @@ async function flipCoins(event) {
         const flips = result.raw
         var table = '<br><br><table><tr><th>Flip Number</th><th>Result</th></tr>'
         for (var i = 0; i < flips.length; i++) {
-            table = table + '<tr><th>' + i + '</th><th><img src=\'./assets/img/' + flips[i] + '.png\'></th></tr>'
+            table = table + '<tr><th>' + (i + 1) + '</th><th><img src=\'./assets/img/' + flips[i] + '.png\'></th></tr>'
         }
         table = table + '</table>'
         document.getElementById('multitable').innerHTML = table
@@ -58,7 +58,47 @@ async function runFlips({ url, formData }) {
     }
 
     const response = await fetch(url, body)
+
     return response.json()
 }
 
 // Guess a flip by clicking either heads or tails button
+async function callFlip(call) {
+    const url = document.baseURI + 'app/flip/call'
+    const data = JSON.stringify({ guess: call })
+    try {
+        const result = await runGuess({ url, data })
+        console.log(result)
+
+        document.getElementById('guessresult').innerHTML = `
+            <strong>Result</strong>
+            <br>
+            Guess: 
+            <br>
+            <img src='./assets/img/` + call + `.png'>
+            <br>
+            Flip:
+            <br>
+            <img src='./assets/img/` + result.flip + `.png'>
+            <br>
+            <br>
+            Result: 
+            <br>`+ result.result
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function runGuess({ url, data }) {
+    const body = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+        },
+        body: data
+    }
+    const response = await fetch(url, body)
+
+    return response.json()
+}
