@@ -38,8 +38,17 @@ const server = app.listen(HTTP_PORT, () => {
 
 const logging = (req, res, next) => {
     const query = db.prepare(`
-        INSERT INTO accesslog (remoteaddr, remoteuser, time, method, 
-        url, protocol, httpversion, status, referer, useragent)
+        INSERT INTO accesslog (
+            remoteaddr, 
+            remoteuser, 
+            time, 
+            method, 
+            url, 
+            protocol, 
+            httpversion, 
+            status, 
+            referer, 
+            useragent)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `
     )
@@ -89,14 +98,16 @@ app.post('/app/flip/call', (req, res, next) => {
     res.status(200).json(coin.flipACoin(req.body.guess))
 })
 
-app.get('/app/log/access', (req, res, next) => {
-    try {
-        const query = db.prepare('SELECT * from accesslog').all()
-        res.status(200).json(query)
-    } catch {
-        console.error(e)
-    }
-})
+if(args.debug) {
+    app.get('/app/log/access', (req, res, next) => {
+        try {
+            const query = db.prepare('SELECT * from accesslog').all()
+            res.status(200).json(query)
+        } catch {
+            console.error(e)
+        }
+    })
+}
 
 app.get('/app/error', (req, res, next) => {
     throw new Error('Error test successful.')
