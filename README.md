@@ -1,20 +1,3 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=7591035&assignment_repo_type=AssignmentRepo)
-# a05 Human Interface
-
-In this assignment, you will build an HTML human interface for your API. You will also document your API endpoints and consider package structure.
-
-## DO NOT CLONE THIS REPOSITORY DIRECTLY
-
-Use the GitHub classroom link instead: https://classroom.github.com/a/PUVGxeMe
-
-If you clone this repo directly, it will not be added to the organization as an individual repo associated with your account and you will not be able to push to it.
-
-## Instructions
-
-Full instructions for this assignment are available at: https://comp426.johndmart.in/a/05/
-
-<!-- DELETE EVERYTHING ABOVE THIS LINE -->
-
 # Coinserver Description
 
 This package exposes endpoints and provides a web interface to emulate random chance coin flip events in the following ways:
@@ -84,19 +67,26 @@ Keep-Alive: timeout=5
 #### Request cURL
 
 ```
-
+curl http://localhost:5000/app/flip/
 ```
 
 #### Response body
 
 ```
-
+{"flip":"tails"}
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 16
+ETag: W/"10-VYm8Bk1/RW8RGhDXdTwBYk6lbGE"
+Date: Thu, 21 Apr 2022 21:29:54 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 ### /app/flips/:number/ (GET)
@@ -104,39 +94,53 @@ Keep-Alive: timeout=5
 #### Request cURL
 
 ```
-
+curl http://localhost:5000/app/flips/10/
 ```
 
 #### Response body
 
 ```
-
+{"raw":["tails","tails","heads","tails","heads","tails","heads","tails","heads","heads"],"summary":{"tails":5,"heads":5}}
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 121
+ETag: W/"79-ICrMdnS/tK6NLlwQW8vxdxuO+UI"
+Date: Thu, 21 Apr 2022 21:33:21 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
-### /app/flip/coin/ (GET)
+### /app/flip/coins/ (POST)
 
 #### Request cURL
 
 ```
-
+curl -X POST -H 'Content-Type: application/json' -d '{ "number" : "10" }' http://localhost:5000/app/flip/coins/
 ```
 
 #### Response body
 
 ```
-
+{"raw":["heads","tails","heads","heads","tails","tails","heads","heads","tails","heads"],"summary":{"tails":4,"heads":6}}
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 42
+ETag: W/"2a-kLT6nA983ABNm7O/I+ik8g0RZgM"
+Date: Thu, 21 Apr 2022 21:44:37 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 ### /app/flip/call/:guess/ (GET)
@@ -144,27 +148,7 @@ Keep-Alive: timeout=5
 #### Request cURL
 
 ```
-
-```
-
-#### Response body
-
-```
-
-```
-
-#### Response headers
-
-```
-
-```
-
-### /app/flip/call/ (POST)
-
-#### Request cURL
-
-```
-curl -X POST -H 'Content-Type: application/json' -d '{"guess":"heads"}' http://localhost:5000/app/flip/call/
+curl http://localhost:5000/app/flip/call/heads
 ```
 
 #### Response body
@@ -181,23 +165,23 @@ X-Powered-By: Express
 Content-Type: application/json; charset=utf-8
 Content-Length: 46
 ETag: W/"2e-U/q8iZ4JKqczXPIvtwiVRpEFlRc"
-Date: Thu, 07 Apr 2022 16:30:07 GMT
+Date: Thu, 21 Apr 2022 21:46:47 GMT
 Connection: keep-alive
 Keep-Alive: timeout=5
 ```
 
-### /app/flip/coins/ (POST)
+### /app/flip/call/ (POST)
 
 #### Request cURL
 
 ```
-curl -X POST -H 'Content-Type: application/json' -d '{"number":"30"}' http://localhost:5000/app/flip/coins/`
+curl -X POST -H 'Content-Type: application/json' -d '{"guess":"heads"}' http://localhost:5000/app/flip/call/
 ```
 
 #### Response body
 
 ```
-{"raw":["heads","heads","heads","tails","heads","heads","tails","tails","tails","heads","heads","heads","heads","heads","heads","tails","tails","heads","heads","heads","heads","heads","heads","heads","tails","heads","tails","heads","tails","heads"],"summary":{"heads":21,"tails":9}}
+{"call":"heads","flip":"tails","result":"lose"}
 ```
 
 #### Response headers
@@ -206,9 +190,9 @@ curl -X POST -H 'Content-Type: application/json' -d '{"number":"30"}' http://loc
 HTTP/1.1 200 OK
 X-Powered-By: Express
 Content-Type: application/json; charset=utf-8
-Content-Length: 283
-ETag: W/"11b-9dPTqGfngSPFEOq4loChIlpdSIE"
-Date: Thu, 07 Apr 2022 15:23:35 GMT
+Content-Length: 46
+ETag: W/"2e-U/q8iZ4JKqczXPIvtwiVRpEFlRc"
+Date: Thu, 07 Apr 2022 16:30:07 GMT
 Connection: keep-alive
 Keep-Alive: timeout=5
 ```
@@ -218,44 +202,33 @@ Keep-Alive: timeout=5
 #### Request cURL
 
 ```
-
+curl http://localhost:5000/app/log/access/
 ```
 
 #### Response body
 
 ```
-
+[{"id":1,"remoteaddr":"::1","remoteuser":null,"time":1650577821862,"method":"GET","url":"/app/log/access/","protocol":1.1,"httpversion":"http","status":null,"referer":null,"useragent":"curl/7.64.1"}]
 ```
 
 #### Response headers
 
 ```
-
-```
-
-### /app/log/access/ (GET)
-
-#### Request cURL
-
-```
-
-```
-
-#### Response body
-
-```
-
-```
-
-#### Response headers
-
-```
-
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 398
+ETag: W/"18e-PBWAY0NBFoGy95+sPStrEE7K22A"
+Date: Thu, 21 Apr 2022 21:50:49 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 ### /app/log/error/ (GET)
 
 _Not yet implemented_
+
+This endpoint will return a log of all errors that have occurred on the server.
 
 #### Request cURL
 
@@ -279,6 +252,8 @@ _Not yet implemented_
 
 _Not yet implemented_
 
+This endpoint will log in an existing user and unlock the functionality of their account.
+
 #### Request cURL
 
 ```
@@ -300,6 +275,8 @@ _Not yet implemented_
 ### /app/user/new/ (POST)
 
 _Not yet implemented_
+
+This endpoint will create a new user account.
 
 #### Request cURL
 
@@ -323,6 +300,8 @@ _Not yet implemented_
 
 _Not yet implemented_
 
+This endpoint will update an existing user's account information.
+
 #### Request cURL
 
 ```
@@ -344,6 +323,8 @@ _Not yet implemented_
 ### /app/user/delete/ (DELETE)
 
 _Not yet implemented_
+
+This endpoint will delete an existing user's account.
 
 #### Request cURL
 
